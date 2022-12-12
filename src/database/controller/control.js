@@ -58,6 +58,7 @@ export const deletePolls = (ids) => {
     try{
         ids.forEach(id => {
             Project.findByIdAndRemove(id).exec()
+            Vote.deleteMany({parent: id}).exec()
         });
     }catch(error) {
         return error
