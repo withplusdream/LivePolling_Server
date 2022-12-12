@@ -108,3 +108,16 @@ export const getWords = async(id) => {
 
     return words
 }
+
+export const resetSlide = async (id) => {
+    try{
+        let project = await Project.findById(id)
+        project.count = 0
+        await project.save()
+        await Vote.deleteMany({parent:id})
+        return {success: true}
+    }
+    catch(error){
+        return {success: false, error: error}
+    }
+}

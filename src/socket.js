@@ -1,7 +1,10 @@
 import {Server} from 'socket.io'
 
 import { adminLogin } from './controllers/api.js';
-import { createProject, getProject, modifyProject, getProjectsByAdmin, deletePolls, checkAccessCode, getProjectById, submitAnswer, getWords } from './database/controller/control.js';
+import { 
+    createProject, getProject, modifyProject, getProjectsByAdmin, deletePolls, checkAccessCode, getProjectById, submitAnswer, getWords,
+    resetSlide 
+} from './database/controller/control.js';
 
 export let io = undefined;
 
@@ -84,6 +87,12 @@ export const connectSocket = (server) => {
         socket.on("getWords", async (data) => {
             let words = await getWords(data.id)
             socket.emit("getWords", {words: words})
+        })
+
+        socket.on("resetSlide", async (data) => {
+            let res = await resetSlide(data.id)
+
+            socket.emit("resetSlide", res)
         })
     })
 }
