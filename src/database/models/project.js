@@ -24,7 +24,6 @@ const projectSchema = new Schema({
     },
     created: {
         type: Date,
-        default: new Date()
     },
     count: {
         type: Number,

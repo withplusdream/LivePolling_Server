@@ -4,6 +4,7 @@ import randomCodeGenerator from './../../controllers/randomCodeGenerator.js';
 
 export const createProject = async (data) => {
     let accessCode;
+    let now = new Date();
 
     while(true){
         accessCode = randomCodeGenerator()
@@ -15,7 +16,8 @@ export const createProject = async (data) => {
     let project = await new Project({
         name: data.name,
         admin: data.admin,
-        accessCode: accessCode
+        accessCode: accessCode,
+        created: now
     })
 
     await project.save()
